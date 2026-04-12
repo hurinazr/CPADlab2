@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kanban Style Task Manager</title>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>🗃️ Kanban Style Task Manager</h1>
+
+			<div class="kanban-counter">
+				<label>Task counter:</label>
+			</div>
+	</div>
+	
+			<div class="filter">
+				<label for="priority-filter"> ✚ Add </label>
+				<select name="priority-filter" id="priority-filter">
+					<option value="low">Low</option>
+					<option value="medium">Medium</option>
+					<option value="high">High</option>
+				</select>
+			</div>
+		</header>
+
+	<main class="kanban-board">
+		<section id="todo" class="kanban-column">
+			<h2>To-Do</h2>
+			<ul>
+				<!-- Task will be listed here-->
+			</ul>
+			<button class="add-task">Add Task</button>
+		</section>
+
+		<section id="inprogress" class="kanban-column">
+			<h2>In Progress</h2>
+			<ul>
+				<!-- Task will be listed here-->
+			</ul>
+			<button class="add-task">Add Task</button>
+		</section>
+
+		<section id="done" class="kanban-column">
+			<h2>Done</h2>
+			<ul>
+				<!-- Task will be listed here-->
+			</ul>
+			<button class="add-task">Add Task</button>
+		</section>
+	</main>
+
+	<!-- Modal Dialog -->
+	<div id="taskModal" hidden>
+		<h3>Add New Task</h3>
+		<form>
+			<label for="taskTitle">Title:</label>
+			<input type="text" id="taskTitle" name="taskTitle">
+
+			<label for="taskDescription">Description:</label>
+			<textarea type="text" id="taskDescription" name="taskDescription"></textarea>
+
+			<label for="taskPriority">Priority:</label>
+			<select id="taskPriority" name="taskPriority">
+				<option value="low">Low</option>
+				<option value="medium">Medium</option>
+				<option value="high">High</option>
+			</select>
+
+			<label for="taskDue">Due Date</label>
+			<input type="date" id="taskDue" name="taskDue">
+
+			<div class="modal-actions">
+				<button type="submit">Save</button>
+				<button type="button" id="cancel">Cancel</button>
+			</div>
+		</form>
+	</div>
+	
+</body>
+</html>
