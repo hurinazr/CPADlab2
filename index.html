@@ -4,19 +4,21 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Kanban Style Task Manager</title>
+	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
 		<header>
-			<h1>🗃️ Kanban Style Task Manager</h1>
+			<h1>📝 Kanban Style Task Manager</h1>
 
 			<div class="kanban-counter">
 				<label>Task counter:</label>
 			</div>
 	</div>
-	
+
 			<div class="filter">
-				<label for="priority-filter"> ✚ Add </label>
+				<label for="priority-filter"> Priority </label>
 				<select name="priority-filter" id="priority-filter">
 					<option value="low">Low</option>
 					<option value="medium">Medium</option>
@@ -53,8 +55,8 @@
 
 	<!-- Modal Dialog -->
 	<div id="taskModal" hidden>
-		<h3>Add New Task</h3>
 		<form>
+			<h3>Add New Task</h3>
 			<label for="taskTitle">Title:</label>
 			<input type="text" id="taskTitle" name="taskTitle">
 
