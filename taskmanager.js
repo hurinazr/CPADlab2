@@ -29,13 +29,15 @@ function createTaskCard(taskObj) {
 	//Edit
 	const editBtn = document.createElement('button');
 	editBtn.textContent = 'Edit';
-	editBtn.addEventListener('click', () => editTask(taskObj.id));
+	editBtn.setAttribute('data-action', 'edit');
+	editBtn.setAttribute('data-id', taskObj.id);
 	li.appendChild(editBtn);
 
 	//Delete
 	const delBtn = document.createElement('button');
 	delBtn.textContent = 'Delete';
-	delBtn.addEventListener('click', () => deleteTask(taskObj.id));
+	delBtn.setAttribute('data-action', 'delete');
+	delBtn.setAttribute('data-id', taskObj.id);
 	li.appendChild(delBtn);
 
 	return li;
@@ -108,3 +110,77 @@ function updateCounter() {
   const counter = document.querySelector('.kanban-counter label');
   counter.textContent = `Task counter: ${tasks.length}`;
 }
+
+document.querySelectorAll('.kanban-column ul').forEach(ul => {
+	ul.addEventListener('click', (event) => {
+		const action = event.target.getAttribute('data-action');
+		const id = event.target.getAttribute('data-id');
+		if (!action || !id) {return};
+		if (action === 'edit') {editTask(id)};
+		if (action === 'delete') {deleteTask(id)};
+	});
+});
+
+// Close modal when Cancel button is clicked
+document.getElementById('cancel').addEventListener('click', () => {
+  document.getElementById('taskModal').hidden = true;
+});
+
+
+//Event Delegation
+editBtn.setAttribute('data-action', 'edit');
+editBtn.setAttribute('data-id', taskObj.id);
+
+delBtn.setAttribute('data-action', 'delete');
+delBtn.setAttribute('data-id', taskObj.id);
+
+//Inline editing
+document.addEventListener('dblclick', (event) => {
+	if (event.target.tagName === 'H4') {
+		const original = event.target.textContent;
+		const input = document.createElement('input');
+		input.type = 'text';
+		input.value = original;
+
+		event.target.replaceWith(input);
+		input.focus();
+
+		const commit = () => {
+			const newTitle = input.value.trim() || original;
+			const h4 = document.createElement('h4');
+			h4.textContent = newTitle;
+			input.replaceWith(h4);
+		};
+
+		input.addEventListener('blur', commit);
+		input.addEventListener('keydown', (e) => {
+			if (e.key === 'Enter') commit();
+		});
+	}
+});
+
+//Priority filter
+document.getElementById('priority-filter').addEventListener('change', (e) => {
+	const selected = e.target.value;
+	document.querySelectorAll('.task-card').forEach(card => {
+		const priority = card.querySelector('.badge').textContent;
+		const hide = selected !== 'all' && priority !== selected;
+		card.classList.toggle('is-hidden', hide);
+	});
+});
+
+//Clear done
+document.querySelector('#done .add-task').insertAdjacentHTML(
+	'afterend',
+	'<button id="clearDone">Clear All</button>'
+);
+
+document.getElementById('clearDone').addEventListener('click', () => {
+	const cards = document.querySelectorAll('#done .task-card');
+	cards.forEach((card, index) => {
+		setTimeout(() => {
+			card.classList.add('fade-out');
+			card.addEventListener('animationend', () => card.remove());
+		} , index * 100);
+	});
+});
