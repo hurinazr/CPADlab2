@@ -178,3 +178,12 @@ header h1 {
   color: #fff;
 }
 .modal-actions button#cancel:hover { background: #dc2626; }
+
+.is-hidden {display: none;}
+
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(10px); }
+}
