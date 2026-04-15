@@ -218,3 +218,10 @@ textarea {
 .is-hidden {
     display: none !important;
 }
+
+.fade-out {
+    animation: fade-away 0.4s forwards;
+}
+@keyframes fade-away {
+    to { opacity: 0; transform: scale(0.9); }
+}
