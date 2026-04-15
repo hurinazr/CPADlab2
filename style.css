@@ -215,3 +215,6 @@ textarea {
 }
 #cancel-btn:hover { background: #dc2626; }
 
+.is-hidden {
+    display: none !important;
+}
