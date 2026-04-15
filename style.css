@@ -1,189 +1,217 @@
-/* Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Public Sans', system-ui, sans-serif;
-  background: #f8c8dc; /* soft pink background */
-  padding: 2rem 1.5rem;
-  color: #334155;
+/* --- Global Resets & Vibe --- */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
-.container { max-width: 1000px; margin: 0 auto; }
+body {
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    background: #f6b0bb;
+    padding: 2rem 1.5rem;
+    color: #1e293b;
+}
 
-/* Header */
+/* --- Header Section --- */
 header {
-  background: #c8f8d4; /* soft green header */
-  border-radius: 1.5rem;
-  padding: 1.5rem 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  border: 1px solid #a7d7b5;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    background: #bfd8a7; 
+    border-radius: 1.5rem;
+    padding: 1.5rem 2rem; 
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #cbd5e1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 header h1 {
-  font-family: 'Merriweather', serif;
-  font-size: 1.8rem;
-  color: #14532d; /* darker green text for contrast */
+    font-size: 1.8rem;
+    /*background: linear-gradient(135deg, #3b82f6, #8b5cf6);*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: white;
 }
 
-.kanban-counter label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #14532d;
+#task-count {
+    background: #e0e7ff; 
+    color: #1e40af;
+    padding: 0.2rem 0.8rem; 
+    border-radius: 20px;
+    font-size: 0.75rem; 
+    font-weight: 600;
 }
 
-.filter label {
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-right: 0.5rem;
-  color: #14532d;
-}
-.filter select {
-  padding: 0.4rem 0.8rem;
-  border-radius: 1rem;
-  border: 1px solid #a7d7b5;
-  font-family: inherit;
+/* --- Priority Filter Style --- */
+#priority-filter {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid #cbd5e1;
+    font-family: inherit;
+    outline: none;
+    color: #475569;
 }
 
-/* Kanban Board */
-.kanban-board {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.8rem;
-}
-@media (max-width: 700px) {
-  .kanban-board { grid-template-columns: 1fr; }
+/* --- Layout Grid (3 Columns) --- */
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
 }
 
-.kanban-column {
-  background: white; /* all columns white */
-  border-radius: 1.2rem;
-  padding: 1.5rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+@media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
 }
 
-.kanban-column h2 {
-  font-family: 'Merriweather', serif;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  border-left: 4px solid #3b82f6;
-  padding-left: 0.7rem;
+/* --- Column / Card Styling --- */
+section {
+    background: #88a47c; 
+    border-radius: 1.2rem;
+    padding: 1.5rem; 
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    min-height: 200px;
 }
 
-.kanban-column ul {
-  list-style: none;
-  margin-top: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+section h2 {
+    font-size: 1.1rem; 
+    margin-bottom: 1.2rem;
+    border-left: 4px solid #3b82f6; 
+    padding-left: 0.7rem;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.kanban-column li {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 1rem;
-  padding: 0.8rem 1rem;
-  font-size: 0.9rem;
+/* Specific border colors for status */
+#todo h2 { border-color: #94a3b8; }
+#inprogress h2 { border-color: #3b82f6; }
+#done h2 { border-color: #10b981; }
+
+/* --- Task List Items --- */
+ul {
+    list-style: none;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
-/* Buttons */
-.add-task {
-  background: #3b82f6;
-  border: none;
-  color: white;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  border-radius: 2rem;
-  cursor: pointer;
-  font-family: inherit;
-  transition: 0.1s;
-}
-.add-task:hover { background: #2563eb; }
-
-/* Modal */
-#taskModal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+li {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 0.9rem;
 }
 
-#taskModal form {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 1.2rem;
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+/* --- Buttons --- */
+button {
+    background: #ffa79e; 
+    border: none; 
+    color: white;
+    font-weight: 600; 
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem; 
+    cursor: pointer;
+    font-family: inherit; 
+    transition: all 0.2s;
+    width: auto;
 }
 
-#taskModal h3 {
-  font-family: 'Merriweather', serif;
-  margin-bottom: 1rem;
+button:hover { 
+    background: #2563eb; 
+    transform: translateY(-1px);
 }
 
-#taskModal label {
-  font-weight: 600;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: #475569;
-  margin-bottom: 0.3rem;
+.add-task-btn {
+    width: 100%;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px dashed #cbd5e1;
 }
 
-#taskModal input,
-#taskModal textarea,
-#taskModal select {
-  width: 100%;
-  padding: 0.7rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 1rem;
-  font-family: inherit;
-  outline: none;
-  margin-bottom: 0.8rem;
+.add-task-btn:hover {
+    background: #e2e8f0;
+    color: #1e293b;
 }
-#taskModal input:focus,
-#taskModal textarea:focus,
-#taskModal select:focus {
-  border-color: #3b82f6;
+
+/* --- Modal Overlay --- */
+#task-modal {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(15, 23, 42, 0.5); /* Darker backdrop */
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#task-modal[hidden] {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+}
+
+/* --- Form Elements in Modal --- */
+label {
+    font-weight: 600; 
+    font-size: 0.75rem;
+    text-transform: uppercase; 
+    color: #64748b;
+    display: block; 
+    margin-bottom: 0.4rem;
+    margin-top: 1rem;
+}
+
+input, textarea, select {
+    width: 100%; 
+    padding: 0.7rem;
+    border: 2px solid #e2e8f0; 
+    border-radius: 0.8rem;
+    font-family: inherit; 
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus, select:focus { 
+    border-color: #3b82f6; 
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
 }
 
 .modal-actions {
-  display: flex;
-  justify-content: space-between;
+    margin-top: 2rem;
+    display: flex;
+    gap: 0.8rem;
 }
 
-.modal-actions button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  font-weight: 600;
+#save-btn { flex: 2; }
+#cancel-btn { 
+    flex: 1; 
+    background: #ef4444; 
 }
+#cancel-btn:hover { background: #dc2626; }
 
-.modal-actions button[type="submit"] {
-  background: #27ae60;
-  color: #fff;
-}
-.modal-actions button#cancel {
-  background: #ef4444;
-  color: #fff;
-}
-.modal-actions button#cancel:hover { background: #dc2626; }
-
-.is-hidden {display: none;}
-
-.fade-out {
-  animation: fadeOut 0.5s forwards;
-}
-@keyframes fadeOut {
-  to { opacity: 0; transform: translateY(10px); }
-}
